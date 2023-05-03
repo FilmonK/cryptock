@@ -1,0 +1,47 @@
+/* :root {
+  --primary: #111B54;
+  --light: #ffffff;
+  --grey: #efefef
+} */
+
+body {
+  overflow: hidden;
+  font-family: 'Muli', sans-serif;
+}
+
+#sidebar-container {
+  min-height: 100vh;
+  background-color: rgb(22, 42, 138) !important;
+}
+
+#sidebar-container .menu {
+  width: 18rem
+}
+
+#content {
+  overflow: auto;
+  height: 100vh;
+  padding-bottom: 5rem;
+}
+
+
+#sidebar-container .logo {
+  padding: .875rem 1.25rem;
+}
+
+.sidelink:hover {
+  background-color: rgb(96, 115, 208);
+}
+
+.sidelink {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+
+
+
+

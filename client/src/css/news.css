@@ -1,0 +1,33 @@
+.icon-img {
+    max-width: 40px;
+    max-height: 40px;  
+}
+
+.newscard-img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.select-news{
+    width: 200px !important;
+}
+
+.news-image-container{
+    display: flex !important;
+    justify-content: space-between !important;
+}
+
+.provider-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.on-hover {
+    transition: all 0.3s ease;
+    cursor: pointer
+}
+
+.on-hover:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.05)
+}

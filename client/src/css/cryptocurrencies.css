@@ -1,0 +1,18 @@
+.card-imgs {
+    max-width: 70px;
+    max-height: 70px;
+}
+
+.select-crypto {
+    width: 200px !important;
+}
+
+.on-hover {
+    transition: all 0.3s ease;
+    cursor: pointer
+}
+
+.on-hover:hover {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.05)
+}

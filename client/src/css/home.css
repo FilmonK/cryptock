@@ -1,0 +1,23 @@
+
+
+.home-title{
+    font-size: 1.4rem !important;
+}
+
+.show-more{
+    font-size: 1.3rem !important;
+}
+
+/* .stat-header{
+
+}
+
+.stat-value{
+
+} */
+
+@media screen and (max-width: 500px){
+    .heading{
+        margin-top: 20px;
+    }
+}
