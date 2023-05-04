@@ -9,7 +9,7 @@ import {
   useGetCryptoHistory2Query,
 } from "../services/cryptoApi";
 
-import { Table, Col, Row, Container } from "react-bootstrap"
+import { Table, Col, Row, Container, Card } from "react-bootstrap"
 import "../css/homechart.css";
 
 import {
@@ -189,7 +189,7 @@ const HomeChart = () => {
     ],
   };
 
-  
+
 
   const createTableData = (rows) => {
     let content = [];
@@ -220,31 +220,57 @@ const HomeChart = () => {
     <>
       <Container>
         <Row className="mb-5">
-        {/* // ---- COIN/FEAR INDEX CHART ---- // */}
+          <Card className= "mt-5 text-center shadow rounded">
+          {/* // ---- COIN/FEAR INDEX CHART ---- // */}
           <Chart type="bar" data={data} options={options} />
+          </Card>
         </Row>
 
         <Row className="mt-5">
           <Col>
-          {/* // ---- TOP 10 COINS ---- // */}
-          <h2 className="text-center">Top 10 Coins</h2>
-            <Table responsive="md">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Coin</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">24 Hour Change</th>
-                </tr>
-              </thead>
-              <tbody>{createTableData(cryptoData)}</tbody>
-            </Table>
+            {/* // ---- TOP 10 COINS ---- // */}
+            <Card className="text-center shadow rounded" key={crypto.uuid}>
+              <Card.Body>
+                <h2 className="text-center">Top 10 Coins</h2>
+                <Table responsive="md">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Coin</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">24 Hour Change</th>
+                    </tr>
+                  </thead>
+                  <tbody>{createTableData(cryptoData)}</tbody>
+                </Table>
+              </Card.Body>
+            </Card>
           </Col>
 
+
           <Col>
-          {/* // ---- OWNERSHIP DOUGHNUT ---- // */}
-          <h2 className="text-center">Portfolio Breakdown</h2>
-            <OwnedChart />
+            {/* // ---- OWNERSHIP DOUGHNUT ---- // */}
+            {/* <h2 className="text-center">Portfolio Breakdown</h2>
+            <OwnedChart /> */}
+
+            <Card className="text-center shadow rounded" key={crypto.uuid}>
+              <Card.Img
+                variant="top"
+                className="card-imgs mt-3 mx-auto"
+                src={crypto.iconUrl}
+              />
+              <Card.Body>
+                <Card.Title>{crypto.rank}. {crypto.name}</Card.Title>
+                <hr />
+                <Card.Text>
+                  <p>Price:</p>
+                  <p>Market Cap:</p>
+                  <p>Daily Change:</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+
+
           </Col>
         </Row>
       </Container>

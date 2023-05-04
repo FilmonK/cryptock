@@ -7,15 +7,17 @@
 body {
   overflow: hidden;
   font-family: 'Muli', sans-serif;
+  background-color: #eff0fe !important;
 }
 
 #sidebar-container {
   min-height: 100vh;
-  background-color: rgb(22, 42, 138) !important;
+  background-color: white !important;
 }
 
+
 #sidebar-container .menu {
-  width: 18rem
+  width: 14rem
 }
 
 #content {
@@ -30,8 +32,9 @@ body {
 }
 
 .sidelink:hover {
-  background-color: rgb(96, 115, 208);
+  color: rgb(56, 80, 198) !important;
 }
+/* rgb(96, 115, 208) */
 
 .sidelink {
   text-decoration: none;

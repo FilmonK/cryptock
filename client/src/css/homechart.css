@@ -2,3 +2,7 @@
     max-height: 30px;
     max-width: 30px;
 }
+
+.rounded-card {
+    border-radius: 20px;
+}
