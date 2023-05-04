@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@alpacahq/alpaca-trade-api": "^3.0.1",
     "axios": "^0.25.0",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
