@@ -116,4 +116,3 @@ const buyFunc = async () => {
 
 }
 
-console.log(buyFunc())

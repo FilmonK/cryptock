@@ -44,7 +44,6 @@ app.post('/buypositions', async (req, res) => {
     const { symbol_type, qty, side, buy_type, time_type } = req.body
 
     //these are placeholder values until the these routes are completed
-
     try {
         await alpaca.createOrder({
             symbol: 'ETH/USD',
@@ -61,8 +60,8 @@ app.post('/buypositions', async (req, res) => {
     }
 })
 
-
-app.get('/stuff', async (req, res) => {
+// get account activities and by default 'FILL' types
+app.get('/activity', async (req, res) => {
     try {
         await alpaca.getAccountActivities({
             activityTypes: 'FILL',
