@@ -4,7 +4,7 @@ const alpaca = new Alpaca({
     keyId: process.env.APCA_API_KEY_ID,
     secretKey: process.env.APCA_API_SECRET_KEY,
     paper: true,
-  });
+});
 
 const wss = new WebSocket("wss://stream.data.alpaca.markets/v1beta1/news");
 
@@ -82,20 +82,38 @@ const wss = new WebSocket("wss://stream.data.alpaca.markets/v1beta1/news");
 //     }
 // });
 
-// ---- Orders ---- //
+// ---- List Orders ---- //
+// const closedOrders = alpaca
+//     .getOrders({
+//         status: "closed",
+//         limit: 100,
+//         nested: true, // show nested multi-leg orders
+//     })
+//     .then((data) => {
+//         console.log(data)
 
-const closedOrders = alpaca
-  .getOrders({
-    status: "closed",
-    limit: 100,
-    nested: true, // show nested multi-leg orders
-  })
-  .then((data) => {
-   console.log(data)
-  
-  })
-  .catch(error => {
-    console.log(error)
-  })
+//     })
+//     .catch(error => {
+//         console.log(error)
+//     })
 
+
+
+// - Buy Orders //
+const buyFunc = async () => {
+    try {
+        let buyOrder = await alpaca.createOrder({
+            symbol: 'ETH/USD',
+            qty: '0.10',
+            side: 'buy',
+            type: 'market',
+            time_in_force: 'gtc'
+        })
+    } catch (error) {
+        console.log(error)
+    }
   
+
+}
+
+console.log(buyFunc())
