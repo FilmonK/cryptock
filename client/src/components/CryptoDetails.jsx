@@ -23,9 +23,9 @@ const CryptoDetails = () => {
   });
 
   const cryptoDetails = data?.data?.coin;
+  // console.log(coinHistory)
 
   if (isFetching) return <Spinner />;
-
 
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
@@ -138,7 +138,7 @@ const CryptoDetails = () => {
                 </h3>
               </Col>
               {stats.map(({ icon, title, value }) => (
-                <Col className="coin-stats">
+                <Col className="coin-stats" key={title}>
                   <Col className="coin-stats-name">
                     <h5>{icon}</h5>
                     <h5>{title}</h5>
@@ -154,7 +154,7 @@ const CryptoDetails = () => {
               <h3 className="coin-details-heading">Market and Exchanges</h3>
             </Col>
             {genericStats.map(({ icon, title, value }) => (
-              <Col className="coin-stats">
+              <Col className="coin-stats" key={title}>
                 <Col className="coin-stats-name">
                   <h5>{icon}</h5>
                   <h5>{title}</h5>

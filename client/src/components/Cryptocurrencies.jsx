@@ -40,26 +40,28 @@ const Cryptocurrencies = () => {
         <Row xs={1} md={4} className="g-4">
           {cryptos?.map((crypto) => (
             <Link to={`/crypto/${crypto.uuid}`}>
-              <Card className={crypto.change > 0.0 ? "radius-10 border-start border-0 border-3 shadow on-hover border-success" : "radius-10 border-start border-0 border-3 shadow on-hover border-danger"}>
-              <div className="card-body">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <p className="mb-0 text-secondary">{crypto.rank}. {crypto.name}</p>
-                    <h4 className="my-1 text-info">Price: {millify(crypto.price)}</h4>
-                    <p className="mb-0 font-13">Daily Change: {millify(crypto.change)}</p>
-                  </div>
-                    <img 
-                     variant="top"
-                     className="card-imgs mt-3 mx-auto"
-                     src={crypto.iconUrl}
-                     alt="coin icon"
+              <Card
+                key={crypto.uuid}
+                className={crypto.change > 0.0 ? "card radius-15 border-start border-0 border-3 shadow on-hover border-success" : "card radius-15 border-start border-0 border-3 shadow on-hover border-danger"}>
+                <div className="card-body">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <p className="mb-0 text-secondary">{crypto.rank}. {crypto.name}</p>
+                      <h4 className="my-1 text-info">Price: {millify(crypto.price)}</h4>
+                      <p className="mb-0 font-13">Daily Change: {millify(crypto.change)}</p>
+                    </div>
+                    <img
+                      variant="top"
+                      className="card-imgs mt-3 mx-auto"
+                      src={crypto.iconUrl}
+                      alt="coin icon"
                     />
+                  </div>
                 </div>
-              </div>
               </Card>
             </Link>
           ))}
-          </Row>
+        </Row>
       </Container>
     </>
   );

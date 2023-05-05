@@ -46,7 +46,7 @@ const News = () => {
           {/* New Section */}
           {cryptoNews.value.map((news, i) => (
             <Col>
-              <Card className="news-card shadow rounded on-hover">
+              <Card className="radius-15 news-card shadow on-hover">
                 <Card.Img
                   className="newscard-img mx-auto mt-3"
                   variant="top"

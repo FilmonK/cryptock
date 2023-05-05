@@ -8,26 +8,28 @@ Chart.register(...registerables);
 
 const { Title } = Typography;
 
+// passed props from CryptoDetails component
 const CryptoChart = ({coinHistory, currentPrice, coinName}) => {
   const coinPrice = [];
   const coinTimestamp = [];
 
+  // the history is hourly time stamps
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinPrice.push(coinHistory?.data?.history[i].price);
+    coinPrice.unshift(coinHistory?.data?.history[i].price);
   }
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp * 1000).toLocaleDateString('en-US'));
+    coinTimestamp.unshift(new Date(coinHistory?.data?.history[i].timestamp * 1000).toLocaleDateString('en-US'));
   }
 
-
+ 
   const data = {
     labels: coinTimestamp,
     datasets: [
       {
         label: 'Price In USD',
         data: coinPrice,
-        fill: false,
+        fill: true,
         backgroundColor: '#0071bd',
         borderColor: '#0071bd',
       },

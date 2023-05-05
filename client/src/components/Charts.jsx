@@ -12,7 +12,7 @@ import {
 
 import CryptoChart from "./CryptoChart";
 import Spinner from "./Spins";
-import { Col, Row, Form, Container } from "react-bootstrap"
+import { Col, Row, Form, Container, Card } from "react-bootstrap"
 import "../css/charts.css";
 
 Chart.register(...registerables);
@@ -61,8 +61,8 @@ const Charts = () => {
 
   const cryptoDetails4 = coinDetail4?.data?.coin;
 
-  //this pulls the list of top 100 coins, from which we can get name, uuid, and basic market information
-  const { data: coinList } = useGetCryptosQuery(100);
+  //this pulls the list of top 50 coins, from which we can get name, uuid, and basic market information
+  const { data: coinList } = useGetCryptosQuery(50);
 
   //date measurements which come from coinranking api
   const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
@@ -71,117 +71,128 @@ const Charts = () => {
 
   return (
     <>
-      <Container>
-        <Row className="mt-4">
+      <Container fluid>
+        <Row>
+          {/* ---- Top left section ---- */}
           <Col md={6}>
-            <Form.Select
-              defaultValue="3h"
-              className="select-timeperiod"
-              placeholder="Select Timeperiod"
-              onChange={(e) => setTimePeriod(e.target.value)}
-            >
-              <option>Select time period</option>
-              {time.map((date) => (
-                <option value={date}>{date}</option>
-              ))}
-            </Form.Select>
+            <Card className="mt-2 text-center shadow radius-15 p-2">
+              <Form.Select
+                defaultValue="3h"
+                className="select-timeperiod mb-2"
+                placeholder="Select Timeperiod"
+                onChange={(e) => setTimePeriod(e.target.value)}
+              >
+                <option>Select time period</option>
+                {time.map((date) => (
+                  <option value={date}>{date}</option>
+                ))}
+              </Form.Select>
 
-            <Form.Select className="mb-5" onChange={(e) => setCoinID(e.target.value)}>
-              <option>crypto selection</option>
-              {coinList?.data?.coins.map((coin) => (
-                <option value={coin.uuid}>{coin.name}</option>
-              ))}
-            </Form.Select>
+              <Form.Select className="mb-5" onChange={(e) => setCoinID(e.target.value)}>
+                <option>crypto selection</option>
+                {coinList?.data?.coins.map((coin) => (
+                  <option key={coin.uuid} value={coin.uuid}>{coin.name}</option>
+                ))}
+              </Form.Select>
 
-            <CryptoChart
-              coinHistory={coinHistory}
-              currentPrice={millify(cryptoDetails?.price)}
-              coinName={cryptoDetails?.name}
-            />
+              <CryptoChart
+                coinHistory={coinHistory}
+                currentPrice={millify(cryptoDetails?.price)}
+                coinName={cryptoDetails?.name}
+              />
+            </Card>
           </Col>
 
-          {/* ------------------------------------------------ */}
+          {/* ---- Top right section ---- */}
           <Col md={6}>
-            <Form.Select
-              defaultValue="24h"
-              className="select-timeperiod"
-              placeholder="Select Timeperiod"
-              onChange={(e) => setTimePeriod2(e.target.value)}
-            >
-              <option>Select time period</option>
-              {time.map((date) => (
-                <option value={date}>{date}</option>
-              ))}
-            </Form.Select>
+            <Card className="mt-2 text-center shadow radius-15 p-2">
+              <Form.Select
+                defaultValue="24h"
+                className="select-timeperiod mb-2"
+                placeholder="Select Timeperiod"
+                onChange={(e) => setTimePeriod2(e.target.value)}
+              >
+                <option>Select time period</option>
+                {time.map((date) => (
+                  <option value={date}>{date}</option>
+                ))}
+              </Form.Select>
 
-            <Form.Select className="mb-5" onChange={(e) => setCoinID2(e.target.value)}>
-              <option>crypto selection</option>
-              {coinList?.data?.coins.map((coin) => (
-                <option value={coin.uuid}>{coin.name}</option>
-              ))}
-            </Form.Select>
+              <Form.Select className="mb-5" onChange={(e) => setCoinID2(e.target.value)}>
+                <option>crypto selection</option>
+                {coinList?.data?.coins.map((coin) => (
+                  <option key={coin.uuid} value={coin.uuid}>{coin.name}</option>
+                ))}
+              </Form.Select>
 
-            <CryptoChart
-              coinHistory={coin2History}
-              currentPrice={millify(cryptoDetails2?.price)}
-              coinName={cryptoDetails2?.name}
-            />
+              <CryptoChart
+                coinHistory={coin2History}
+                currentPrice={millify(cryptoDetails2?.price)}
+                coinName={cryptoDetails2?.name}
+              />
+            </Card>
           </Col>
         </Row>
-        {/* ------------------------------------------------ */}
+
+        {/* ---- Bottom left section ---- */}
         <Row className="mt-4">
           <Col md={6}>
-            <Form.Select
-              defaultValue="7d"
-              className="select-timeperiod"
-              placeholder="Select Timeperiod"
-              onChange={(e) => setTimePeriod3(e.target.value)}
-            >
-              <option>Select time period</option>
-              {time.map((date) => (
-                <option value={date}>{date}</option>
-              ))}
-            </Form.Select>
+            <Card className="mt-2 text-center shadow radius-15 p-2">
+              <Form.Select
+                defaultValue="7d"
+                className="select-timeperiod mb-2"
+                placeholder="Select Timeperiod"
+                onChange={(e) => setTimePeriod3(e.target.value)}
+              >
+                <option>Select time period</option>
+                {time.map((date) => (
+                  <option value={date}>{date}</option>
+                ))}
+              </Form.Select>
 
-            <Form.Select className="mb-5" onChange={(e) => setCoinID3(e.target.value)}>
-              <option>crypto selection</option>
-              {coinList?.data?.coins.map((coin) => (
-                <option value={coin.uuid}>{coin.name}</option>
-              ))}
-            </Form.Select>
+              <Form.Select className="mb-5" onChange={(e) => setCoinID3(e.target.value)}>
+                <option>crypto selection</option>
+                {coinList?.data?.coins.map((coin) => (
+                  <option key={coin.uuid} value={coin.uuid}>{coin.name}</option>
+                ))}
+              </Form.Select>
 
-            <CryptoChart
-              coinHistory={coin3History}
-              currentPrice={millify(cryptoDetails3?.price)}
-              coinName={cryptoDetails3?.name}
-            />
+              <CryptoChart
+                coinHistory={coin3History}
+                currentPrice={millify(cryptoDetails3?.price)}
+                coinName={cryptoDetails3?.name}
+              />
+            </Card>
           </Col>
 
+          {/* ---- Bottom right section ---- */}
           <Col md={6}>
-            <Form.Select
-              defaultValue="30d"
-              className="select-timeperiod"
-              placeholder="Select Timeperiod"
-              onChange={(e) => setTimePeriod4(e.target.value)}
-            >
-              <option>Select time period</option>
-              {time.map((date) => (
-                <option value={date}>{date}</option>
-              ))}
-            </Form.Select>
+            <Card className="mt-2 text-center shadow radius-15 p-2">
+              <Form.Select
+                defaultValue="30d"
+                className="select-timeperiod mb-2"
+                placeholder="Select Timeperiod"
+                onChange={(e) => setTimePeriod4(e.target.value)}
+              >
+                <option>Select time period</option>
+                {time.map((date) => (
+                  <option value={date}>{date}</option>
+                ))}
+              </Form.Select>
 
-            <Form.Select className="mb-5" onChange={(e) => setCoinID4(e.target.value)}>
-              <option>crypto selection</option>
-              {coinList?.data?.coins.map((coin) => (
-                <option value={coin.uuid}>{coin.name}</option>
-              ))}
-            </Form.Select>
+              <Form.Select className="mb-5" onChange={(e) => setCoinID4(e.target.value)}>
+                <option>crypto selection</option>
+                {coinList?.data?.coins.map((coin) => (
+                  <option key={coin.uuid} value={coin.uuid}>{coin.name}</option>
+                ))}
+              </Form.Select>
 
-            <CryptoChart
-              coinHistory={coin4History}
-              currentPrice={millify(cryptoDetails4?.price)}
-              coinName={cryptoDetails4?.name}
-            />
+              <CryptoChart
+                coinHistory={coin4History}
+                currentPrice={millify(cryptoDetails4?.price)}
+                coinName={cryptoDetails4?.name}
+              />
+            </Card>
           </Col>
         </Row>
       </Container>

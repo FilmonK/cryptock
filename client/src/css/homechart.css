@@ -6,3 +6,7 @@
 .rounded-card {
     border-radius: 20px;
 }
+
+.radius-15 {
+    border-radius: 15px !important;
+}

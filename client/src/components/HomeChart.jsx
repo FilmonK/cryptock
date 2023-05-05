@@ -73,7 +73,7 @@ const HomeChart = () => {
   try {
     if (coinHistoryDetails) {
       for (let i = 0; i < coinHistoryDetails.length; i++) {
-        btcPrices.push(coinHistoryDetails[i].price);
+        btcPrices.unshift(coinHistoryDetails[i].price);
       }
     }
   } catch (error) {
@@ -83,7 +83,7 @@ const HomeChart = () => {
   try {
     if (coin2HistoryDetails) {
       for (let i = 0; i < coin2HistoryDetails.length; i++) {
-        ethPrices.push(coin2HistoryDetails[i].price);
+        ethPrices.unshift(coin2HistoryDetails[i].price);
       }
     }
   } catch (error) {
@@ -108,8 +108,8 @@ const HomeChart = () => {
 
   //loop through fear index to get values and dates of the last 30 days in order to use for the chart
   for (let i = 0; i < fearValues.length; i++) {
-    fearIndexValue.push(fearValues[i].value);
-    fearIndexDates.push(
+    fearIndexValue.unshift(fearValues[i].value);
+    fearIndexDates.unshift(
       new Date(fearValues[i].timestamp * 1000).toLocaleDateString()
     );
   }
@@ -142,6 +142,10 @@ const HomeChart = () => {
         type: "linear",
         display: true,
         position: "left",
+        title: {
+          display: true,
+          text: 'Fear Index'
+        },
       },
       y1: {
         type: "linear",
@@ -149,6 +153,10 @@ const HomeChart = () => {
         position: "right",
         grid: {
           drawOnChartArea: false,
+        },
+        title: {
+          display: true,
+          text: 'Coin Price'
         },
       },
     },
@@ -167,7 +175,7 @@ const HomeChart = () => {
         yAxisID: "y",
       },
       {
-        type: "line",
+        type: "bar",
         // fill: true,
         lineTension: 0.8,
         label: "Bitcoin Price",
@@ -177,7 +185,7 @@ const HomeChart = () => {
         yAxisID: "y1",
       },
       {
-        type: "line",
+        type: "bar",
         // fill: true,
         lineTension: 0.8,
         label: "Ethereum Price",
@@ -188,7 +196,6 @@ const HomeChart = () => {
       },
     ],
   };
-
 
 
   const createTableData = (rows) => {
@@ -220,16 +227,21 @@ const HomeChart = () => {
     <>
       <Container>
         <Row className="mb-5">
-          <Card className= "mt-5 text-center shadow rounded">
+          <Card className="mt-5 text-center shadow radius-15">
           {/* // ---- COIN/FEAR INDEX CHART ---- // */}
-          <Chart type="bar" data={data} options={options} />
+            <Chart type="bar" data={data} options={options} />
           </Card>
+
+          {/* <Card className="mt-5 text-center shadow radius-15">
+            <Chart type="bar" data={data} options={options} />
+          </Card> */}
+
         </Row>
 
         <Row className="mt-5">
           <Col>
             {/* // ---- TOP 10 COINS ---- // */}
-            <Card className="text-center shadow rounded" key={crypto.uuid}>
+            <Card className="radius-15 card text-center shadow" key={crypto.uuid}>
               <Card.Body>
                 <h2 className="text-center">Top 10 Coins</h2>
                 <Table responsive="md">
