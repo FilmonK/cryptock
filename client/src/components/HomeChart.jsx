@@ -203,7 +203,7 @@ const HomeChart = () => {
     for (let i = 0; i < rows.length; i++) {
       const item = rows[i];
       content.push(
-        <tr>
+        <tr key={item.name}>
           <td>
             {" "}
             <img
@@ -226,22 +226,65 @@ const HomeChart = () => {
   return (
     <>
       <Container>
+
+        <Row className="mt-2">
+          <Col md={6}>
+            <div className="card chart-card">
+              <div className="card-body pb-0">
+                <h5 className="card-title font-weight-bold">Total Value of all Coins</h5>
+                <p className="card-text mb-4">• May 2, 1:15PM •</p>
+                <div className="d-flex justify-content-between">
+                  <p className="display-4 align-self-end">$28,492.58</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card chart-card">
+              <div className="card-body pb-0">
+                <h5 className="card-title font-weight-bold">Total Value of all Stocks</h5>
+                <p className="card-text mb-4">• May 2, 1:15PM •</p>
+                <div className="d-flex justify-content-between">
+                  <p className="display-4 align-self-end">$143,928.72</p>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          <Col md={6}>
+            <div className="card chart-card">
+              <div className="card-body pb-0">
+                <h5 className="card-title font-weight-bold">This Week's Crypto Trades</h5>
+                <p className="card-text mb-4">12 Trades with 4 coins</p>
+                <div className="d-flex justify-content-between">
+                  <p className="display-4 align-self-end">+ $887.32</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card chart-card">
+              <div className="card-body pb-0">
+                <h5 className="card-title font-weight-bold">This Week's Stock Trades</h5>
+                <p className="card-text mb-4">118 Trades with 22 stocks</p>
+                <div className="d-flex justify-content-between">
+                  <p className="display-4 align-self-end">- 12,629.38</p>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+        </Row>
+
         <Row className="mb-5">
           <Card className="mt-5 text-center shadow radius-15">
-          {/* // ---- COIN/FEAR INDEX CHART ---- // */}
+            {/* // ---- COIN/FEAR INDEX CHART ---- // */}
             <Chart type="bar" data={data} options={options} />
           </Card>
-
-          {/* <Card className="mt-5 text-center shadow radius-15">
-            <Chart type="bar" data={data} options={options} />
-          </Card> */}
-
         </Row>
 
         <Row className="mt-5">
           <Col>
             {/* // ---- TOP 10 COINS ---- // */}
-            <Card className="radius-15 card text-center shadow" key={crypto.uuid}>
+            <Card className="radius-15 card text-center shadow">
               <Card.Body>
                 <h2 className="text-center">Top 10 Coins</h2>
                 <Table responsive="md">
@@ -281,8 +324,6 @@ const HomeChart = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-
-
           </Col>
         </Row>
       </Container>
