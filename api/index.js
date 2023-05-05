@@ -81,6 +81,20 @@ app.get('/activity', async (req, res) => {
     }
 })
 
+app.get('/assets', async (req, res) => {
+    try {
+        await alpaca.getAssets({
+            status: "active",
+        })
+        .then((data) => {
+            console.log(data)
+            res.send(data)
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 
 

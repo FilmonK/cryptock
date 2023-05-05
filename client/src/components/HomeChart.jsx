@@ -221,7 +221,7 @@ const HomeChart = () => {
     return content;
   };
 
-  if (isFetching) return <Spinner />;
+  if (isFetching | !coin2History) return <Spinner />;
 
   return (
     <>
@@ -271,7 +271,6 @@ const HomeChart = () => {
               </div>
             </div>
           </Col>
-
         </Row>
 
         <Row className="mb-5">
@@ -282,7 +281,7 @@ const HomeChart = () => {
         </Row>
 
         <Row className="mt-5">
-          <Col>
+          <Col md={6}>
             {/* // ---- TOP 10 COINS ---- // */}
             <Card className="radius-15 card text-center shadow">
               <Card.Body>
@@ -303,27 +302,25 @@ const HomeChart = () => {
           </Col>
 
 
-          <Col>
-            {/* // ---- OWNERSHIP DOUGHNUT ---- // */}
-            {/* <h2 className="text-center">Portfolio Breakdown</h2>
-            <OwnedChart /> */}
+          {/* <Col md={6}>
+        
+            <h2 className="text-center">Portfolio Breakdown</h2>
+                <OwnedChart />
 
-            <Card className="text-center shadow rounded" key={crypto.uuid}>
-              <Card.Img
-                variant="top"
-                className="card-imgs mt-3 mx-auto"
-                src={crypto.iconUrl}
-              />
-              <Card.Body>
-                <Card.Title>{crypto.rank}. {crypto.name}</Card.Title>
-                <hr />
-                <Card.Text>
-                  <p>Price:</p>
-                  <p>Market Cap:</p>
-                  <p>Daily Change:</p>
-                </Card.Text>
-              </Card.Body>
-            </Card>
+      
+          </Col> */}
+
+        </Row>
+
+        <Row>
+          <Col>
+
+
+            <h2 className="text-center">Portfolio Breakdown</h2>
+            <OwnedChart />
+
+
+
           </Col>
         </Row>
       </Container>

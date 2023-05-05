@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
-import Container from "react-bootstrap/Container";
+import { Container, Card } from "react-bootstrap";
 import Spinner from "./Spins";
 
 const Trades = () => {
@@ -55,7 +55,8 @@ useEffect(() => {
 
   return (
     <>
-      <Container>
+      <Container fluid>
+      <Card className="radius-15 card text-center shadow mt-4">
         <Table responsive="md">
           <thead>
             <tr>
@@ -72,6 +73,7 @@ useEffect(() => {
            {createTableData(tradeActivity)}
           </tbody>
         </Table>
+        </Card>
       </Container>
     </>
   );

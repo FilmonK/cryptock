@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import axios from "axios";
+import Spinner from "./Spins";
 import "../css/cryptochart.css";
 import {
   Chart as ChartJS,
@@ -37,33 +38,33 @@ const OwnedChart = () => {
 
   //get percentage ownership information from backend
   useEffect(() => {
-    const getCoinOwned = async () => {
+    const getAssets = async ()=> {
       await axios
-        .get("http://localhost:5000/all")
-        .then((coins) => {
-        //   console.log(coins?.data?.data?.values);
-          setAssets(coins?.data?.data?.values);
+        .get("http://localhost:7160/positions")
+        .then((data) => {
+          // console.log(data?.data);
+          setAssets(data?.data);
         })
         .catch((err) => {
-          console.log(`axios google sheet retrieve error...${err}`);
+          console.log(`Axios asset retrieve error: ${err}`);
         });
     };
-    getCoinOwned();
+    getAssets();
   }, []);
 
-  //looping through googlesheets api response which returns nested arrays
+  
   try {
-    for (let i = 1; i < assets.length; i++) {
-      const item = assets[i];
-      coinsOwnedLabel.push(item[0]);
-      coinsOwnedPercentages.push(item[1]);
+    for (let i = 0; i < assets.length; i++) {
+      coinsOwnedLabel.push(assets["symbol"]);
+      coinsOwnedPercentages.push(assets["qty"]);
     }
   } catch (error) {
-    console.log(
-      `Error: Failed to push data from google sheets to arrays...${error}`
-    );
+    console.log(`Error: Failed to push data from google sheets to arrays...${error}`);
   }
 
+  if (coinsOwnedLabel.length > 0) {
+    console.log(coinsOwnedLabel)
+  }
   
   // ---- OWNERSHIP CHART ---- //
   const options = {
@@ -108,6 +109,7 @@ const OwnedChart = () => {
     ],
   };
 
+  if (!assets) return <Spinner />
 
   return (
     <>
