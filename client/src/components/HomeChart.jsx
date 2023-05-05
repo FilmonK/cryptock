@@ -58,7 +58,7 @@ const HomeChart = () => {
 
   const cryptoData = cryptoList?.data?.coins;
   // console.log(cryptoList?.data?.coins);
-  console.log(cryptoData);
+  // console.log(cryptoData);
   // console.log(coinHistory);
 
   const { data: coin2History } = useGetCryptoHistory2Query({
@@ -90,7 +90,6 @@ const HomeChart = () => {
     console.log(`ETH history details error...${error}`);
   }
 
-  //retreiving fear index....consider moving to toolkit
   useEffect(() => {
     const fearData = async () => {
       await axios
@@ -100,11 +99,12 @@ const HomeChart = () => {
           //  console.log(f_data)
         })
         .catch((err) => {
-          console.log(`axios fear data errro...${err}`);
+          console.log(`Axios fear data retrieval errror...${err}`);
         });
     };
     fearData();
   }, []);
+
 
   //loop through fear index to get values and dates of the last 30 days in order to use for the chart
   for (let i = 0; i < fearValues.length; i++) {

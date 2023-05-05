@@ -46,9 +46,9 @@ app.post('/buypositions', async (req, res) => {
     //these are placeholder values until the these routes are completed
     try {
         await alpaca.createOrder({
-            symbol: 'ETH/USD',
-            qty: 0.054,
-            side: 'sell',
+            symbol: 'HSIC',
+            qty: 49,
+            side: 'buy',
             type: 'market',
             time_in_force: 'gtc'
         }).then(data => {
@@ -74,7 +74,7 @@ app.get('/activity', async (req, res) => {
         })
             .then((data) => {
                 console.log(data)
-                res.send(Data)
+                res.send(data)
             })
     } catch (error) {
         console.log(error)

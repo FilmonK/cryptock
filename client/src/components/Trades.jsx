@@ -5,22 +5,22 @@ import Container from "react-bootstrap/Container";
 import Spinner from "./Spins";
 
 const Trades = () => {
-  const [tradeInfo, setTradeInfo] = useState([]);
+  const [tradeActivity, setTradeActivity] = useState([])
 
-  useEffect(() => {
-    const getInfo = async () => {
-      await axios
-        .get("http://localhost:5000/trades")
-        .then((ss_data) => {
-          setTradeInfo(ss_data?.data?.data?.values);
-        })
-        .catch((err) => {
-          console.log(`axios trade state error...${err}`);
-        });
-    };
-    getInfo();
-  }, []);
-
+// retrieving trading activity 
+useEffect(() => {
+  const trades = async () => {
+    await axios.get(`http://localhost:7160/activity`)
+    .then((a_data) => {
+      setTradeActivity(a_data?.data)
+      console.log(a_data?.data)
+    })
+    .catch((err) => {
+      console.log(`Axios activity data retrieval errror: ${err}`);
+    });
+  };
+  trades()
+}, [])
 
   //the purpose of this function is to assign className dynamically to the tables
   const rowColor = (buy_type) => {
@@ -29,29 +29,29 @@ const Trades = () => {
     if (buy_type === "deposit") return "table-info"
   };
 
-  //due to google sheets api return nested arrays, created a function to loop through each item and be able to specify index in order to use the "rowColor" function above
+  // creating the table by storing elements into an array before rendering below
   const createTableData = rows => {
     let content = [];
-    for (let i = 1; i < rows.length; i++) {
-      const item = rows[i];
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i]["type"] !== "partial_fill") {
       content.push(
-        <tr className={rowColor(item[2])}>
-          <td>{item[0]}</td>
-          <td>{item[1]}</td>
-          <td>{item[2]}</td>
-          <td>{item[3]}</td>
-          <td>{item[4]}</td>
-          <td>{item[5]}</td>
-          <td>{item[6]}</td>
-          <td>{item[7]}</td>
-          <td>{item[8]}</td>
+        //getting the "side" value
+        <tr className={rowColor(rows[i]["side"])}>
+          <td>{rows[i]["order_id"]}</td>
+          <td>{rows[i]["transaction_time"]}</td>
+          <td>{rows[i]["type"]}</td>
+          <td>{rows[i]["symbol"]}</td>
+          <td>{rows[i]["side"]}</td>
+          <td>{rows[i]["cum_qty"]}</td>
+          <td>{rows[i]["price"]}</td>
         </tr>
       );
+      }
     }
     return content;
   };
 
-  if (!tradeInfo) return <Spinner />
+  if (!tradeActivity) return <Spinner />
 
   return (
     <>
@@ -59,18 +59,17 @@ const Trades = () => {
         <Table responsive="md">
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              <th scope="col">Order ID</th>
               <th scope="col">Date</th>
               <th scope="col">Type</th>
-              <th scope="col">Ticker</th>
-              <th scope="col">Name</th>
+              <th scope="col">Symbol</th>
+              <th scope="col">Order Type</th>
               <th scope="col">Buy/Sell Quantity</th>
-              <th scope="col">Coin Price</th>
-              <th scope="col">Fiat Value</th>
+              <th scope="col">Price</th>
             </tr>
           </thead>
           <tbody>
-           {createTableData(tradeInfo)}
+           {createTableData(tradeActivity)}
           </tbody>
         </Table>
       </Container>
