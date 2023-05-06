@@ -32,17 +32,16 @@ ChartJS.register(
 
 
 const OwnedChart = () => {
-  const coinsOwnedLabel = [];
-  const coinsOwnedPercentages = [];
+  const assetArray = []
   const [assets, setAssets] = useState([]);
 
   //get percentage ownership information from backend
   useEffect(() => {
-    const getAssets = async ()=> {
+    const getAssets = async () => {
       await axios
         .get("http://localhost:7160/positions")
         .then((data) => {
-          // console.log(data?.data);
+          console.log(data?.data);
           setAssets(data?.data);
         })
         .catch((err) => {
@@ -52,42 +51,45 @@ const OwnedChart = () => {
     getAssets();
   }, []);
 
-  
+
   try {
     for (let i = 0; i < assets.length; i++) {
-      coinsOwnedLabel.push(assets["symbol"]);
-      coinsOwnedPercentages.push(assets["qty"]);
+      assetArray.push([assets[i]["symbol"], Number(assets[i]["qty"])])
     }
   } catch (error) {
     console.log(`Error: Failed to push data from google sheets to arrays...${error}`);
   }
 
-  if (coinsOwnedLabel.length > 0) {
-    console.log(coinsOwnedLabel)
-  }
-  
+  const sortedAssetObject = assetArray.sort(function (a, b) {
+    return b[1] - a[1]
+  })
+
+  console.log(sortedAssetObject)
+
+
   // ---- OWNERSHIP CHART ---- //
   const options = {
-      plugins: {
-          datalabels: {
-              formatter: (value) => {
-                  return value + '%'
-              },
-              font: {
-                size: 18
-              }
-          }
-      },
-    
+    plugins: {
+      datalabels: {
+        formatter: (value) => {
+          return value + '%'
+        },
+        font: {
+          size: 18
+        }
+      }
+    },
+
   };
 
-  const labels = coinsOwnedLabel;
+  const labels = sortedAssetObject.map((item) => item[0]);
   const data = {
     labels,
     datasets: [
       {
         label: "Owned",
-        data: coinsOwnedPercentages,
+        data: sortedAssetObject.map((item) => item[1]),
+
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -109,11 +111,11 @@ const OwnedChart = () => {
     ],
   };
 
-  if (!assets) return <Spinner />
+  if (!assets | assetArray.length < 1) return <Spinner />
 
   return (
     <>
-      <Doughnut type="bar" data={data} options={options} />
+      <Doughnut data={data} options={options} />
     </>
   );
 };
