@@ -283,7 +283,7 @@ const HomeChart = () => {
         <Row className="mt-5">
           <Col md={6}>
             {/* // ---- TOP 10 COINS ---- // */}
-            <Card className="radius-15 card text-center shadow">
+            <Card className="radius-15 card text-center shadow" style={{maxHeight: '36rem'}}>
               <Card.Body>
                 <h2 className="text-center">Top 10 Coins</h2>
                 <Table responsive="md">
@@ -302,25 +302,11 @@ const HomeChart = () => {
           </Col>
 
 
-          {/* <Col md={6}>
-        
-            <h2 className="text-center">Portfolio Breakdown</h2>
-                <OwnedChart />
-
-      
-          </Col> */}
-
-        </Row>
-
-        <Row>
-          <Col>
-
-
-            <h2 className="text-center">Portfolio Breakdown</h2>
-            <OwnedChart />
-
-
-
+          <Col md={6}>
+            <Card className="radius-15 card text-center shadow p-2" style={{maxHeight: '36rem'}}>
+              <h2 className="text-center">Portfolio Breakdown</h2>
+              <OwnedChart />
+            </Card>
           </Col>
         </Row>
       </Container>

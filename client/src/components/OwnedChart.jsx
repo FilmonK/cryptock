@@ -41,7 +41,7 @@ const OwnedChart = () => {
       await axios
         .get("http://localhost:7160/positions")
         .then((data) => {
-          console.log(data?.data);
+          // console.log(data?.data);
           setAssets(data?.data);
         })
         .catch((err) => {
@@ -64,8 +64,22 @@ const OwnedChart = () => {
     return b[1] - a[1]
   })
 
-  console.log(sortedAssetObject)
 
+  // get totals of crypto/stock in order to get to get percentage of ownership
+  // then loop through items to get percentage of ownership for each item
+  const itemTotals = sortedAssetObject.reduce((a, b) => {
+    return a + b[1]
+  }, 0)
+
+  for (let index = 0; index < sortedAssetObject.length; index++) {
+    let tempValue = 0
+    //divde element owned by total to get percentage
+    tempValue = ((sortedAssetObject[index][1] / itemTotals) * 100).toFixed(2)
+    // add percentage to that element
+    sortedAssetObject[index][2] = tempValue
+  }
+
+  console.log(sortedAssetObject)
 
   // ---- OWNERSHIP CHART ---- //
   const options = {
@@ -82,13 +96,13 @@ const OwnedChart = () => {
 
   };
 
-  const labels = sortedAssetObject.map((item) => item[0]);
+  const labels = sortedAssetObject.slice(0,8).map((item) => item[0]);
   const data = {
     labels,
     datasets: [
       {
         label: "Owned",
-        data: sortedAssetObject.map((item) => item[1]),
+        data: sortedAssetObject.slice(0,8).map((item) => item[2]),
 
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
