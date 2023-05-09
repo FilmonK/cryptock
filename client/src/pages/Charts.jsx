@@ -10,8 +10,8 @@ import {
   useGetCryptoHistory4Query,
 } from "../services/cryptoApi";
 
-import CryptoChart from "./CryptoChart";
-import Spinner from "./Spins";
+import CryptoChart from "../components/CryptoChart";
+import Spinner from "../components/Spins";
 import { Col, Row, Form, Container, Card } from "react-bootstrap"
 import "../css/charts.css";
 

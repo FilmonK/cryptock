@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import { Container, Card } from "react-bootstrap";
-import Spinner from "./Spins";
+import Spinner from "../components/Spins";
 
 const Trades = () => {
   const [tradeActivity, setTradeActivity] = useState([])

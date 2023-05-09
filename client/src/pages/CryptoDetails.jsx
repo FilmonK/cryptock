@@ -3,8 +3,8 @@ import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
 import millify from "millify";
 import { Col, Row, Form, Container } from "react-bootstrap"
-import CryptoChart from "./CryptoChart";
-import Spinner from "./Spins";
+import CryptoChart from "../components/CryptoChart";
+import Spinner from "../components/Spins";
 import {
   useGetCryptoDetailQuery,
   useGetCryptoHistoryQuery,

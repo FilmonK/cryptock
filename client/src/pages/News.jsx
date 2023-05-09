@@ -3,12 +3,10 @@ import moment from "moment";
 import { Form, Card, ListGroup, Col, Row, Container } from "react-bootstrap"
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
-import Spinner from "./Spins";
+import Spinner from "../components/Spins";
+import noImage from "../images/icons8-no-image-100.png"
 import "../css/news.css";
 
-//change demo image!!!!!!!!!
-const demoImage =
-  "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
 
 const News = () => {
   const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
@@ -50,7 +48,7 @@ const News = () => {
                 <Card.Img
                   className="newscard-img mx-auto mt-3"
                   variant="top"
-                  src={news?.image?.thumbnail?.contentUrl || demoImage}
+                  src={news?.image?.thumbnail?.contentUrl || noImage}
                 />
                 <Card.Body>
                   <Card.Title>
@@ -74,7 +72,7 @@ const News = () => {
                           className="icon-img"
                           src={
                             news.provider[0]?.image?.thumbnail?.contentUrl ||
-                            demoImage
+                            noImage
                           }
                           alt="avatar news media"
                         />

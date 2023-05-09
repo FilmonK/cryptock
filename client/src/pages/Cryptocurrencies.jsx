@@ -3,7 +3,7 @@ import millify from "millify";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Link } from "react-router-dom";
 import { Row, Form, Container, Card } from "react-bootstrap"
-import Spinner from "./Spins"
+import Spinner from "../components/Spins"
 import "../css/cryptocurrencies.css";
 
 const Cryptocurrencies = () => {

@@ -1,13 +1,13 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Sidebar  from "./components/Sidebar";
-import Cryptocurrencies from "./components/Cryptocurrencies"
-import CryptoDetails from "./components/CryptoDetails";
-import News from "./components/News";
+import Cryptocurrencies from "./pages/Cryptocurrencies"
+import CryptoDetails from "./pages/CryptoDetails";
+import News from "./pages/News";
 import Home from "./components/Home";
-import Trades from "./components/Trades";
-import Charts from "./components/Charts"
-import CCalendar from "./components/CCalendar.jsx"
+import Trades from "./pages/Trades";
+import Charts from "./pages/Charts"
+import CCalendar from "./pages/CCalendar.jsx"
 
 import "./App.css";
 

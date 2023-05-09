@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Chart } from "react-chartjs-2";
-import Spinner from "./Spins";
-import OwnedChart from "./OwnedChart";
+import Spinner from "../components/Spins";
+import OwnedChart from "../components/OwnedChart";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import {
   useGetCryptoHistoryQuery,
